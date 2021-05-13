@@ -1,3 +1,4 @@
+#!/bin/bash
 terraform init
 terraform apply  
 
@@ -9,3 +10,5 @@ terraform output config_map_aws_auth > ./config_map_aws_auth.yaml
 export KUBECONFIG=./kubeconfig
 kubectl apply -f ./config_map_aws_auth.yaml
 kubectl get nodes --watch
+kubectl create -f example/hello-kubernetes.yml
+kubectl get all

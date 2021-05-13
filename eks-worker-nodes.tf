@@ -105,7 +105,7 @@ resource "aws_launch_configuration" "eks" {
   associate_public_ip_address = true
   iam_instance_profile        = "${aws_iam_instance_profile.eks-node.name}"
   image_id                    = "${data.aws_ami.eks-worker.id}"
-  instance_type               = "t2.micro"
+  instance_type               = "${var.ec-2-instance_type}"
   name_prefix                 = "eks"
   security_groups             = ["${aws_security_group.eks-node.id}"]
   user_data_base64            = "${base64encode(local.eks-node-userdata)}"
@@ -115,9 +115,9 @@ resource "aws_launch_configuration" "eks" {
 }
 
 resource "aws_autoscaling_group" "eks" {
-  desired_capacity     = 5
+  desired_capacity     = "${var.no-of-ec-2-instance_type}"
   launch_configuration = "${aws_launch_configuration.eks.id}"
-  max_size             = 5
+  max_size             = "${var.no-of-ec-2-instance_type}"
   min_size             = 1
   name                 = "eks"
   vpc_zone_identifier  = aws_subnet.eks[*].id

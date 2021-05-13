@@ -1,15 +1,17 @@
+--- 
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
-metadata:
-  name: flask-ingress
-  annotations:
+metadata: 
+  annotations: 
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-spec:
-  rules:
-  - host: foo.example.com
-    http:
-      paths:
-      backend:
-        serviceName: flask-service
-        servicePort: http
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+  name: flask-ingress
+spec: 
+  rules: 
+    - 
+      host: https://C7CB22164BB19E727DC368345A81FFA8.gr7.us-west-2.eks.amazonaws.com
+      http: 
+        backend: 
+          serviceName: flask-service
+          servicePort: http
+        paths: ~
